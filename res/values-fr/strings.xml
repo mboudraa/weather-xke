@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">weather-xke</string>
+
+    <string name="menu_search">Lieu à rechercher</string>
+    <string name="menu_locate">Ma position</string>
+
+    <string name="currently">En ce moment</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="today_short">auj\'</string>
+
+    <string name="added_favorites">%1$s a été ajoutée dans tes favoris</string>
+    <string name="removed_favorites">%1$s a été supprimée de tes favoris</string>
+
+    <string name="sunriseTime">Lever de soleil</string>
+    <string name="sunsetTime">Coucher de soleil</string>
+    <string name="precipIntensity">Intens. précipitation</string>
+    <string name="precipProbability">Proba. précipitation</string>
+    <string name="dewPoint">Point de rosée</string>
+    <string name="humidity">Humidité</string>
+    <string name="cloudCover">Couverture nuageuse</string>
+    <string name="pressure">Pression</string>
+    <string name="visibility">Visibilité</string>
+    <string name="feltTemperature">Temp. ressentie</string>
+
+</resources>

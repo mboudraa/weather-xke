@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_search"
+          android:title="@string/menu_search"
+          android:icon="@drawable/ic_action_search"
+          android:showAsAction="ifRoom|collapseActionView"
+          android:actionViewClass="android.widget.SearchView" />
+
+    <item android:id="@+id/menu_geolocalize"
+          android:title="@string/menu_search"
+          android:icon="@drawable/ic_action_locate"
+          android:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/menu_addToFavorite"
+          android:title="@string/menu_search"
+          android:icon="@drawable/ic_starred"
+          android:showAsAction="ifRoom"/>
+</menu>

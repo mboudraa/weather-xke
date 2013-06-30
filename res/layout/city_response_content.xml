@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5sp"
+                android:layout_marginBottom="5sp">
+
+    <TextView
+        android:id="@+id/cityNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/cityIcon"
+        android:layout_marginLeft="10sp"
+        android:text="City Name"/>
+
+    <TextView
+        android:id="@+id/cityDetailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cityNameTextView"
+        android:layout_alignLeft="@id/cityNameTextView"
+        android:layout_toLeftOf="@+id/cityIcon"
+        android:text="Province Name"/>
+
+    <ImageView
+        android:id="@+id/cityIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10sp"
+        android:background="@drawable/ic_starred"/>
+
+
+</RelativeLayout>

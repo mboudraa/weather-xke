@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">weather-xke</string>
+
+    <string name="menu_search">Location to search</string>
+    <string name="menu_locate">My position</string>
+
+    <string name="currently">Currently</string>
+    <string name="today">Today</string>
+    <string name="today_short">d.d.</string>
+
+    <string name="added_favorites">%1$s has been added to your favorites</string>
+    <string name="removed_favorites">%1$s has been removed from your favorites</string>
+
+    <string name="sunriseTime">Sunrise</string>
+    <string name="sunsetTime">Sunset</string>
+    <string name="precipIntensity">Precip. Intens.</string>
+    <string name="precipProbability">Precip. Proba.</string>
+    <string name="dewPoint">Dew Point</string>
+    <string name="humidity">Humidity</string>
+    <string name="cloudCover">Cloud cover</string>
+    <string name="pressure">Pressure</string>
+    <string name="visibility">Visibility</string>
+    <string name="feltTemperature">Felt temp</string>
+</resources>

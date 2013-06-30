@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+            android:id="@+id/forecast_currently_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:text="@string/currently"
+            android:textSize="15sp"/>
+
+
+    <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+
+        <ImageView
+                android:id="@+id/forecast_current_weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"/>
+
+
+        <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/forecast_current_weather_icon"
+                android:layout_centerVertical="true">
+
+            <TextView
+                    android:id="@+id/forecast_current_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="40sp"/>
+
+            <ImageView
+                    android:id="@+id/forecast_current_wind_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/forecast_current_temperature"
+                    android:layout_alignLeft="@id/forecast_current_temperature"/>
+
+            <TextView
+                    android:id="@+id/forecast_current_wind_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/forecast_current_temperature"
+                    android:layout_toRightOf="@id/forecast_current_wind_icon"
+                    android:layout_alignRight="@id/forecast_current_temperature"
+                    android:gravity="right"
+                    android:textSize="15sp"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/forecast_welcome_feltTemperature_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feltTemperature"
+                />
+
+        <TextView
+                android:id="@+id/forecast_welcome_feltTemperature_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/forecast_welcome_feltTemperature_label"
+                android:layout_marginLeft="15sp"/>
+
+        <TextView
+                android:id="@+id/forecast_welcome_dewpoint_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dewPoint"
+                android:layout_below="@id/forecast_welcome_feltTemperature_label"/>
+
+        <TextView
+                android:id="@+id/forecast_welcome_dewpoint_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/forecast_welcome_dewpoint_label"
+                android:layout_alignLeft="@id/forecast_welcome_feltTemperature_value"
+                android:layout_below="@id/forecast_welcome_feltTemperature_value"/>
+
+        <TextView
+                android:id="@+id/forecast_welcome_humidity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/humidity"
+                android:layout_below="@id/forecast_welcome_dewpoint_label"/>
+
+        <TextView
+                android:id="@+id/forecast_welcome_humidity_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/forecast_welcome_humidity_label"
+                android:layout_alignLeft="@id/forecast_welcome_feltTemperature_value"
+                android:layout_below="@id/forecast_welcome_dewpoint_value"/>
+
+        <TextView
+                android:id="@+id/forecast_welcome_pressure_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pressure"
+                android:layout_below="@id/forecast_welcome_humidity_label"/>
+
+        <TextView
+                android:id="@+id/forecast_welcome_pressure_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/forecast_welcome_pressure_label"
+                android:layout_alignLeft="@id/forecast_welcome_feltTemperature_value"
+                android:layout_below="@id/forecast_welcome_humidity_value"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
