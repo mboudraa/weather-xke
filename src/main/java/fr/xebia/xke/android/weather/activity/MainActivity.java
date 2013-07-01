@@ -11,14 +11,14 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import com.googlecode.androidannotations.annotations.AfterViews;
 import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.ItemClick;
-import com.googlecode.androidannotations.annotations.SystemService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import fr.xebia.xke.android.weather.R;
 import fr.xebia.xke.android.weather.api.favorites.FavoritesChangeListener;
+import fr.xebia.xke.android.weather.api.favorites.FavoritesManager;
 import fr.xebia.xke.android.weather.api.location.WeatherLocation;
 import fr.xebia.xke.android.weather.api.location.WeatherLocationListener;
+import fr.xebia.xke.android.weather.api.location.WeatherLocationManager;
 import fr.xebia.xke.android.weather.fragment.BaseFragment;
 import fr.xebia.xke.android.weather.fragment.ForecastWelcomeFragment;
 import fr.xebia.xke.android.weather.fragment.SelectPlaceFragment;
@@ -31,13 +31,27 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
     private static final String CURRENT_FRAGMENT_KEY = "currentFragment";
 
-    @SystemService
     SearchManager mSearchManager;
+
+    WeatherLocation mCurrentLocation;
+
+    WeatherLocation mLocalizedLocation;
+
+    String mFindPlaceRequestCacheKey;
+
+    String mLoadForecastRequestCacheKey;
+
+    WeatherLocationManager mLocationManager;
+
+    WeatherActionBarManager mActionBarManager;
+
+    FavoritesManager mFavoritesManager;
+
 
     private SelectPlaceFragment mSelectPlaceFragment;
     private ForecastWelcomeFragment mForecastWelcomeFragment;
     private SearchView mSearchView;
-    private MenuItem mItemSelected;
+
     private BaseFragment mCurrentFragment;
 
     private boolean mLocalizationRequested;
@@ -78,12 +92,6 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        mItemSelected = item;
-
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
 
 
         switch (item.getItemId()) {
@@ -146,28 +154,6 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
     }
 
-
-    @ItemClick(R.id.left_drawer)
-    public void onNavigationItemClicked(int position) {
-        WeatherLocation location = mDrawerAdapter.getItem(position);
-        showForecastWelcomeFragment(location);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLocalizationRequested = mCurrentLocation == null;
-        mLocationManager.requestPosition(this);
-        mFavoritesManager.addListener(this);
-
-    }
-
-    @Override
-    protected void onPause() {
-        mLocationManager.removeUpdates(this);
-        mFavoritesManager.removeListener(this);
-        super.onPause();
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

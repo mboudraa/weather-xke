@@ -1,7 +1,6 @@
 package fr.xebia.xke.android.weather.fragment;
 
 import android.widget.ListView;
-import com.googlecode.androidannotations.annotations.AfterViews;
 import fr.xebia.xke.android.weather.adapter.ForecastWeekListAdapter;
 import fr.xebia.xke.android.weather.api.forecast.DailyWeatherDataPoint;
 import fr.xebia.xke.android.weather.api.forecast.WeatherForecast;
@@ -49,7 +48,6 @@ public class ForecastWelcomeFragment extends BaseFragment {
         return TAG;
     }
 
-    @AfterViews
     protected void onViewCreated() {
 
         //TODO init ListView Header
