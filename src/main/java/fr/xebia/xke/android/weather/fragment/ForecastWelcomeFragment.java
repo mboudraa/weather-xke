@@ -50,8 +50,8 @@ public class ForecastWelcomeFragment extends BaseFragment {
 
     protected void onViewCreated() {
 
-        //TODO init ListView Header
-        //TODO Add LIstView Header to the listView
+        //TODO init mForecastHeader
+        //TODO Add mForecastHeader as listView header
         //TODO Set listView Adapter
 
         mForecastListView.setHeaderDividersEnabled(true);

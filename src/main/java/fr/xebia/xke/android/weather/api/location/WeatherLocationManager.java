@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by mounirboudraa on 02/06/13.
  */
-//TODO Add the corrects annotations to make it as asingleton and inject fields
+//TODO Add the corrects annotations to make it as a singleton and inject fields
 public class WeatherLocationManager implements LocationListener {
 
     Context mContext;

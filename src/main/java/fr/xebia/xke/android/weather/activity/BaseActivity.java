@@ -14,6 +14,8 @@ import de.akquinet.android.androlog.Log;
 public abstract class BaseActivity extends FragmentActivity {
 
 
+    //TODO Initialize WeatherSpiceService and bind it with the corrects lifecycles methods
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
