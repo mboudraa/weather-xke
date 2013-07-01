@@ -7,8 +7,6 @@ import android.widget.BaseAdapter;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
 import fr.xebia.xke.android.weather.api.forecast.DailyWeatherDataPoint;
-import fr.xebia.xke.android.weather.view.ForecastWeekItemView;
-import fr.xebia.xke.android.weather.view.ForecastWeekItemView_;
 
 import java.util.ArrayList;
 
@@ -25,9 +23,6 @@ public class ForecastWeekListAdapter extends BaseAdapter {
 
     @RootContext
     Context context;
-
-
-
 
 
     @Override
@@ -47,15 +42,8 @@ public class ForecastWeekListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ForecastWeekItemView view;
-        if (convertView == null) {
-            view = ForecastWeekItemView_.build(context);
-        } else {
-            view = (ForecastWeekItemView) convertView;
-        }
-
-        view.bind(getItem(position));
-        return view;
+        //TODO Bind ForecastWeekItemView and return binded view
+        return convertView;
     }
 
 

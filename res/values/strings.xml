@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">weather-xke</string>
 
+    <string name="forecast_api_key">27843f1c90d943718611c202b9754378</string>
+
     <string name="menu_search">Location to search</string>
     <string name="menu_locate">My position</string>
 

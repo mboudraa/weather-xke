@@ -5,6 +5,7 @@ import android.location.*;
 import android.os.Bundle;
 import com.googlecode.androidannotations.annotations.*;
 import com.googlecode.androidannotations.api.Scope;
+import de.akquinet.android.androlog.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -108,8 +109,7 @@ public class WeatherLocationManager implements LocationListener {
                 }
             }
         } catch (IOException e) {
-            //TODO log error
-            e.printStackTrace();
+            Log.e(e.getMessage());
         }
     }
 

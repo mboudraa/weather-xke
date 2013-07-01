@@ -2,36 +2,26 @@ package fr.xebia.xke.android.weather.activity;
 
 import android.annotation.TargetApi;
 import android.app.SearchManager;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
-import com.googlecode.androidannotations.annotations.*;
-import com.octo.android.robospice.persistence.DurationInMillis;
+import com.googlecode.androidannotations.annotations.AfterViews;
+import com.googlecode.androidannotations.annotations.EActivity;
+import com.googlecode.androidannotations.annotations.ItemClick;
+import com.googlecode.androidannotations.annotations.SystemService;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import fr.xebia.xke.android.weather.R;
-import fr.xebia.xke.android.weather.adapter.CityListAdapter;
 import fr.xebia.xke.android.weather.api.favorites.FavoritesChangeListener;
-import fr.xebia.xke.android.weather.api.favorites.FavoritesManager;
-import fr.xebia.xke.android.weather.api.forecast.WeatherForecast;
 import fr.xebia.xke.android.weather.api.location.WeatherLocation;
 import fr.xebia.xke.android.weather.api.location.WeatherLocationListener;
-import fr.xebia.xke.android.weather.api.location.WeatherLocationManager;
-import fr.xebia.xke.android.weather.fragment.*;
-import fr.xebia.xke.android.weather.request.FindPlaceRequest;
-import fr.xebia.xke.android.weather.request.ForecastRequest;
+import fr.xebia.xke.android.weather.fragment.BaseFragment;
+import fr.xebia.xke.android.weather.fragment.ForecastWelcomeFragment;
+import fr.xebia.xke.android.weather.fragment.SelectPlaceFragment;
 import fr.xebia.xke.android.weather.request.response.ListPlaces;
 import fr.xebia.xke.android.weather.request.response.WeatherForecastResponse;
 
@@ -41,48 +31,14 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
     private static final String CURRENT_FRAGMENT_KEY = "currentFragment";
 
-
     @SystemService
     SearchManager mSearchManager;
-
-    @InstanceState
-    WeatherLocation mCurrentLocation;
-
-    @InstanceState
-    WeatherLocation mLocalizedLocation;
-
-    @InstanceState
-    String mFindPlaceRequestCacheKey;
-
-    @InstanceState
-    String mLoadForecastRequestCacheKey;
-
-    @Bean
-    WeatherLocationManager mLocationManager;
-
-    @Bean
-    WeatherActionBarManager mActionBarManager;
-
-    @ViewById(R.id.left_drawer)
-    ListView mLeftDrawer;
-
-    @ViewById(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
-
-    @Bean
-    CityListAdapter mDrawerAdapter;
-
-    @Bean
-    FavoritesManager mFavoritesManager;
-
-    private final Handler mHandler = new Handler();
 
     private SelectPlaceFragment mSelectPlaceFragment;
     private ForecastWelcomeFragment mForecastWelcomeFragment;
     private SearchView mSearchView;
     private MenuItem mItemSelected;
     private BaseFragment mCurrentFragment;
-    private ActionBarDrawerToggle mDrawerToggle;
 
     private boolean mLocalizationRequested;
 
@@ -122,6 +78,7 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         mItemSelected = item;
 
         if (mDrawerToggle.onOptionsItemSelected(item)) {
@@ -215,69 +172,24 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mCurrentFragment != null) {
-            getSupportFragmentManager().putFragment(outState, CURRENT_FRAGMENT_KEY, mCurrentFragment);
-        }
+        //TODO Sauvegarder l'etat du fragment courant
     }
 
     @AfterViews
     protected void afterActivityCreated() {
 
-        mActionBarManager.init(mCurrentLocation);
-        mActionBarManager.setLocalizedLocation(mLocalizedLocation);
-        initNavigationDrawer();
-        initFragments();
+        //TODO Initialiser l'action bar
 
-        mDrawerAdapter.setData(mFavoritesManager.getFavorites());
-
-        mActionBarManager.showActionBar();
-
-        if (mCurrentFragment == null || mCurrentFragment.equals(mForecastWelcomeFragment)) {
-            showForecastWelcomeFragment(mCurrentLocation, true);
-        } else if (mCurrentFragment.equals(mSelectPlaceFragment)) {
-            showSelectPlaceFragment();
-        }
+        //TODO initialiser la vue
 
     }
 
-    private void initNavigationDrawer() {
-
-
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        mLeftDrawer.setAdapter(mDrawerAdapter);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, 0, 0) {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                final int width = drawerView.getLayoutParams().width;
-                mCurrentFragment.getView().setTranslationX(slideOffset * width);
-            }
-        };
-
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
 
     private void initFragments() {
-        if (mCurrentFragment != null) {
-            if (SelectPlaceFragment.TAG.equals(mCurrentFragment.getFragmentTag())) {
-                mSelectPlaceFragment = (SelectPlaceFragment) mCurrentFragment;
-            } else if (ForecastWelcomeFragment.TAG.equals(mCurrentFragment.getFragmentTag())) {
-                mForecastWelcomeFragment = (ForecastWelcomeFragment) mCurrentFragment;
-            }
-        }
-
-        if (mSelectPlaceFragment == null) {
-            mSelectPlaceFragment = SelectPlaceFragment_.builder().build();
-        }
-
-        if (mForecastWelcomeFragment == null) {
-            mForecastWelcomeFragment = ForecastWelcomeFragment_.builder().build();
-        }
+        //TODO Initialiser les fragments
     }
 
-    @Background
     protected void showFragment(BaseFragment fragment) {
-
         if (fragment == null) {
             throw new IllegalArgumentException("fragment to show must not be null.");
         }
@@ -285,7 +197,6 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
 
-//        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         if (mCurrentFragment != null) {
 
@@ -297,81 +208,31 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
                 ft.addToBackStack(null);
             }
 
-            ft.detach(mCurrentFragment);
         }
 
-        ft.replace(R.id.container, fragment, fragment.getFragmentTag())
-                .attach(fragment);
-
+        ft.replace(R.id.container, fragment, fragment.getFragmentTag());
 
         ft.commit();
 
-        if (mDrawerLayout.isDrawerOpen(mLeftDrawer)) {
-            toggleDrawer();
-        }
-
     }
 
-
-    @UiThread
-    protected void toggleDrawer() {
-        mDrawerLayout.closeDrawer(mLeftDrawer);
-    }
-
-    private void collapseSearchView() {
-        if (mItemSelected != null) {
-            mItemSelected.collapseActionView();
-            mSearchView.setQuery("", false);
-            mSearchView.clearFocus();
-        }
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
 
     public void loadPlaces(String placeQuery) {
-
-        spiceManager.cancel(ListPlaces.class, mFindPlaceRequestCacheKey);
-
-        FindPlaceRequest findPlaceRequest = new FindPlaceRequest(placeQuery);
-        mFindPlaceRequestCacheKey = "FindPlaceRequestCacheKey." + placeQuery;
-
-        spiceManager.execute(findPlaceRequest, mFindPlaceRequestCacheKey, DurationInMillis.ALWAYS_EXPIRED, new FindPlaceRequestListener());
+        //TODO Effectuer la recherche de ville
     }
 
     public void loadForecast(final WeatherLocation weatherLocation) {
-        final String apiKey = "27843f1c90d943718611c202b9754378";
-
-
-        spiceManager.cancel(WeatherForecast.class, mLoadForecastRequestCacheKey);
-
-        ForecastRequest forecastRequest = new ForecastRequest(weatherLocation, apiKey);
-        mLoadForecastRequestCacheKey = "LoadForecastRequestCacheKey." + weatherLocation.getCity() + "," + weatherLocation.getProvince() + "," + weatherLocation.getCountry();
-
-
-//        ForecastRequest forecastRequest = new ForecastMockRequest(this);
-        spiceManager.execute(forecastRequest, mLoadForecastRequestCacheKey, DurationInMillis.ONE_HOUR, new ForecastRequestListener());
+        //TODO  Effectuer l'appel au web service de météo
     }
 
     @Override
     public void onFavoriteAdded(WeatherLocation location) {
-        mDrawerAdapter.addData(location);
-        Toast.makeText(this, getResources().getString(R.string.added_favorites, location.getCity()), Toast.LENGTH_SHORT).show();
+        //TODO Favoris ajouté
     }
 
     @Override
     public void onFavoriteRemoved(WeatherLocation location) {
-        mDrawerAdapter.removeData(location);
-        Toast.makeText(this, getResources().getString(R.string.removed_favorites, location.getCity()), Toast.LENGTH_SHORT).show();
+        //TODO Favoris supprimé
     }
 
 
@@ -379,21 +240,12 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
 
         @Override
         public void onRequestFailure(SpiceException spiceException) {
-            Toast.makeText(MainActivity.this, "Fail to load cities", Toast.LENGTH_SHORT).show();
+            //TODO Afficher que la recherche d'une ville est impossible
         }
 
         @Override
         public void onRequestSuccess(final ListPlaces places) {
-
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (mSelectPlaceFragment.isVisible()) {
-                        mSelectPlaceFragment.updateUI(places);
-                    }
-                }
-            });
-
+            //TODO Mettre à jour la vue de recherche de ville
         }
     }
 
@@ -404,30 +256,11 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
         @Override
         public void onRequestFailure(SpiceException spiceException) {
             //TODO Afficher qu'il est impossible de récupérer les données météo
-            Toast.makeText(MainActivity.this, "Fail to load weather forecasts", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         public void onRequestSuccess(final WeatherForecastResponse response) {
-
-            mHandler.postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-
-                    mCurrentLocation = response.getWeatherLocation();
-                    mActionBarManager.updateActionBar(mCurrentLocation);
-
-                    collapseSearchView();
-
-                    if (mForecastWelcomeFragment.isVisible())
-
-                    {
-                        mForecastWelcomeFragment.updateUI(response.getForecast(), mCurrentLocation);
-                    }
-                }
-            }, 300);
-
+            //TODO Mettre à jour la vue principale
         }
     }
 }

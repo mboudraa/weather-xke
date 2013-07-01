@@ -7,8 +7,6 @@ import android.widget.BaseAdapter;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
 import fr.xebia.xke.android.weather.api.location.WeatherLocation;
-import fr.xebia.xke.android.weather.view.PlaceFoundItemView;
-import fr.xebia.xke.android.weather.view.PlaceFoundItemView_;
 
 import java.util.ArrayList;
 
@@ -44,15 +42,8 @@ public class CityListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        PlaceFoundItemView view;
-        if (convertView == null) {
-            view = PlaceFoundItemView_.build(context);
-        } else {
-            view = (PlaceFoundItemView) convertView;
-        }
-
-        view.bind(getItem(position));
-        return view;
+        //TODO Bind PlaceFoundItemView  and return binded view
+        return convertView;
     }
 
 
