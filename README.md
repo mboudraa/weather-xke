@@ -49,7 +49,7 @@ Open your `~/.m2/settings.xml` and add the following lines
 ###Project installation
 execute the following command lines in a terminal:
 ```
-mkdir ~/XKE/weather-xke
+mkdir ~/XKE
 cd ~/XKE/weather-xke
 git clone https://github.com/mboudraa/weather-xke.git
 git checkout origin develop
