@@ -3,8 +3,6 @@ package fr.xebia.xke.android.weather.api.location;
 import android.content.Context;
 import android.location.*;
 import android.os.Bundle;
-import com.googlecode.androidannotations.annotations.*;
-import com.googlecode.androidannotations.api.Scope;
 import de.akquinet.android.androlog.Log;
 
 import java.io.IOException;
@@ -14,20 +12,17 @@ import java.util.List;
 /**
  * Created by mounirboudraa on 02/06/13.
  */
-@EBean(scope = Scope.Singleton)
+//TODO Add the corrects annotations to make it as asingleton and inject fields
 public class WeatherLocationManager implements LocationListener {
 
-    @RootContext
     Context mContext;
 
-    @SystemService
     LocationManager mLocationManager;
 
     private Criteria mCriteria = new Criteria();
     private Object mLocationListenersMutex = new Object();
     private ArrayList<WeatherLocationListener> mLocationListeners = new ArrayList<WeatherLocationListener>();
 
-    @AfterInject
     protected void init() {
 
         mCriteria.setAccuracy(Criteria.ACCURACY_FINE);
@@ -83,8 +78,6 @@ public class WeatherLocationManager implements LocationListener {
 
     }
 
-
-    @Background
     protected void notifyListeners(Location location) {
         Geocoder geocoder = new Geocoder(mContext);
         try {

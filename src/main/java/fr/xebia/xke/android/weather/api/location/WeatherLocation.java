@@ -1,14 +1,12 @@
 package fr.xebia.xke.android.weather.api.location;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * User: mounirboudraa
  * Date: 22/05/13
  * Time: 23:02
  */
-public class WeatherLocation implements Parcelable {
+//TODO Make it Parcelable to to allow the preservation of its state during configuration change
+public class WeatherLocation {
 
     private String city;
     private String province;
@@ -18,14 +16,6 @@ public class WeatherLocation implements Parcelable {
 
 
     private WeatherLocation() {
-    }
-
-    private WeatherLocation(Parcel in) {
-        city = in.readString();
-        province = in.readString();
-        country = in.readString();
-        latitude = in.readDouble();
-        longitude = in.readDouble();
     }
 
 
@@ -81,28 +71,6 @@ public class WeatherLocation implements Parcelable {
         result = 31 * result + (country != null ? country.hashCode() : 0);
         return result;
     }
-
-    public int describeContents() {
-        return 0;
-    }
-
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(city);
-        out.writeString(province);
-        out.writeString(country);
-        out.writeDouble(latitude);
-        out.writeDouble(longitude);
-    }
-
-    public static final Parcelable.Creator<WeatherLocation> CREATOR = new Parcelable.Creator<WeatherLocation>() {
-        public WeatherLocation createFromParcel(Parcel in) {
-            return new WeatherLocation(in);
-        }
-
-        public WeatherLocation[] newArray(int size) {
-            return new WeatherLocation[size];
-        }
-    };
 
     public static class LocationBuilder {
 

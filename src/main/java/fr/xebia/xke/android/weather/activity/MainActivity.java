@@ -4,8 +4,6 @@ import android.annotation.TargetApi;
 import android.app.SearchManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
@@ -36,10 +34,6 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
     WeatherLocation mCurrentLocation;
 
     WeatherLocation mLocalizedLocation;
-
-    String mFindPlaceRequestCacheKey;
-
-    String mLoadForecastRequestCacheKey;
 
     WeatherLocationManager mLocationManager;
 
@@ -180,25 +174,7 @@ public class MainActivity extends BaseActivity implements SearchView.OnQueryText
             throw new IllegalArgumentException("fragment to show must not be null.");
         }
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-
-        if (mCurrentFragment != null) {
-
-            final String currentFragmentTag = mCurrentFragment.getFragmentTag();
-
-            if (!currentFragmentTag.equals(fragment.getFragmentTag()) &&
-                    !(currentFragmentTag.equals(SelectPlaceFragment.TAG))) {
-
-                ft.addToBackStack(null);
-            }
-
-        }
-
-        ft.replace(R.id.container, fragment, fragment.getFragmentTag());
-
-        ft.commit();
+        //TODO Switch between fragments
 
     }
 

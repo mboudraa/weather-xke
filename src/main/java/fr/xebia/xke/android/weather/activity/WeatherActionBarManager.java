@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
-import com.googlecode.androidannotations.annotations.Bean;
 import com.googlecode.androidannotations.annotations.EBean;
 import com.googlecode.androidannotations.annotations.RootContext;
 import com.googlecode.androidannotations.annotations.UiThread;
@@ -31,7 +30,7 @@ public class WeatherActionBarManager {
     @RootContext
     BaseActivity mContext;
 
-    @Bean
+    //TODO Add the correct annotation to inject mLocationManager
     WeatherLocationManager mLocationManager;
 
 
