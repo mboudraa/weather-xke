@@ -50,7 +50,7 @@ Open your `~/.m2/settings.xml` and add the following lines
 execute the following command lines in a terminal:
 ```
 mkdir ~/XKE
-cd ~/XKE/weather-xke
+cd ~/XKE
 git clone https://github.com/mboudraa/weather-xke.git
 git checkout origin develop
 
